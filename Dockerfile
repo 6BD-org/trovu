@@ -1,5 +1,7 @@
 FROM golang:1.13 as builder
 
+ENV https_proxy 10.114.114.1:1091
+
 WORKDIR /workspace
 
 ADD . /workspace
@@ -13,4 +15,4 @@ WORKDIR /
 COPY --from=builder /workspace/trovu .
 USER nonroot:nonroot
 
-ENTRYPOINT ["./trovu"]
+ENTRYPOINT ["./trovu", "-mode", "cluster"]

@@ -1,5 +1,6 @@
 KUBE_CONFIG ?= ./.kube/config
 NAMESPACE ?= default
+IMG ?= wylswz/trovu:0.1.0
 
 # Run go fmt against code
 fmt:
@@ -17,3 +18,9 @@ run: build
 
 exec:
 	export NAMESPACE=${NAMESPACE} &&./trovu --mode=local --kubeConfig=${KUBE_CONFIG}
+
+docker-build:
+	docker build --network=host -t $(IMG)  .
+
+docker-push: docker-build
+	docker push $(IMG)
