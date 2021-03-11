@@ -10,7 +10,8 @@ fmt:
 vet:
 	go vet ./...
 
-build: vet fmt
+build:
+	export CGO_ENABLED=0
 	go build -a -o trovu
 
 run: build
@@ -24,3 +25,6 @@ docker-build:
 
 docker-push: docker-build
 	docker push $(IMG)
+
+deploy:
+	kustomize build config | kubectl apply -f -

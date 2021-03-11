@@ -1,1 +1,4 @@
 namespace: xm-system
+
+resources:
+  - trovu-deploy.yaml
